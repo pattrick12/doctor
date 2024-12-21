@@ -21,13 +21,18 @@ class VaccinationRecordViewSet(viewsets.ModelViewSet):
     queryset = VaccinationRecord.objects.all()
     serializer_class = VaccinationRecordSerializer
 
+
+def customers(request):
+    customers = Customer.objects.all()
+    return render(request, 'customers.html', {'customers': customers})
+
 # Template Views
 def register_customer(request):
     if request.method == 'POST':
         form = CustomerForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('customer_list')
+            return redirect('customers')
     else:
         form = CustomerForm()
     return render(request, 'register_customer.html', {'form': form})
