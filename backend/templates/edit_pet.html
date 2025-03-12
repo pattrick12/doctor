@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Customer List</title>
+    <title>Edit Pet</title>
      <style>
         .top-right-buttons {
             position: absolute;
@@ -29,26 +29,11 @@
     <div class="dashboard-menu">
         <button onclick="document.location='/patients'">Dashboard</button>
     </div>
-    <h1>Customer List</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Contact Number</th>
-                <th>Address</th>
-                <th>Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for customer in customers %}
-            <tr>
-                <td>{{ customer.name }}</td>
-                <td>{{ customer.contact_number }}</td>
-                <td>{{ customer.address }}</td>
-                <td>{{ customer.email }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <h1>Edit Pet</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
 </body>
 </html>

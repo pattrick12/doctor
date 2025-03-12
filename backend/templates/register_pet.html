@@ -2,13 +2,33 @@
 <html>
 <head>
     <title>Register Pet</title>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+      <style>
+        .select2-container--default .select2-selection--single {
+            height: 40px;
+            width: 300px;
+            font-size: 16px;
+        }
+        .select2-container--default .select2-dropdown {
+            width: 300px !important;
+            font-size: 16px;
+        }
+    </style>
+
 </head>
 <body>
     <h1>Register Pet</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Register</button>
+        <button type="submit">Save</button>
     </form>
+    <script>
+        $(document).ready(function() {
+            $('#id_customer').select2();
+        });
+    </script>
 </body>
 </html>

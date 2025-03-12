@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Welcome to the Dashboard</h1>
+    <ul>
+        <li><a href="{% url 'register_customer' %}">Register Customer</a></li>
+        <li><a href="{% url 'register_pet' %}">Register Pet</a></li>
+        <li><a href="{% url 'customer_list' %}">Customer-List</a></li>
+        <li><a href="{% url 'create_appointment' %}">Create Appointment</a></li>
+        <li><a href="{% url 'record_vaccination' %}">Record Vaccination</a></li>
+        <li><a href="{% url 'customer_search' %}">Customers</a></li>
+        <li><a href="{% url 'pet_list' %}">Pets</a></li>
+        <li><a href="{% url 'calendar_view' %}">Calendar</a></li>
+        <li><a href="{% url 'appointments_list' %}">Appointments</a></li>
+        <li><a href="{% url 'vaccinations_list' %}">Vaccinations</a></li>
+    </ul>
+</body>
+</html>

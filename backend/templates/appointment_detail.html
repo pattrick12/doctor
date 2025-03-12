@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Customer List</title>
-     <style>
+    <title>Appointment Detail</title>
+        <style>
         .top-right-buttons {
             position: absolute;
             top: 10px;
@@ -29,26 +29,17 @@
     <div class="dashboard-menu">
         <button onclick="document.location='/patients'">Dashboard</button>
     </div>
-    <h1>Customer List</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Contact Number</th>
-                <th>Address</th>
-                <th>Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for customer in customers %}
-            <tr>
-                <td>{{ customer.name }}</td>
-                <td>{{ customer.contact_number }}</td>
-                <td>{{ customer.address }}</td>
-                <td>{{ customer.email }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <h1>Appointment Detail</h1>
+    <p>Appointment Date: {{ appointment.appointment_date }}</p>
+    <p>Reason: {{ appointment.reason }}</p>
+    <p>Status: {{ appointment.status }}</p>
+    <p>Appointment Type: {{ appointment.appointment_type }}</p>
+    <p>Treating Doctor: {{ appointment.treating_doctor }}</p>
+    <p>Pet: <a href="{% url 'pet_detail' appointment.pet.id %}">{{ appointment.pet.name }}</a></p>
+    <p>Owner: <a href="{% url 'customer_detail' appointment.customer.id %}">{{ appointment.customer.name }}</a></p>
+    <p>Diagnosis: {{ appointment.diagnosis }}</p>
+    <p>Prescription: {{ appointment.prescription }}</p>
+    <p>Additional Notes: {{ appointment.additional_notes }}</p>
+    <a href="{% url 'edit_appointment' appointment.id %}">Edit</a>
 </body>
 </html>

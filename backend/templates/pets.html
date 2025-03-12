@@ -1,0 +1,37 @@
+ <style>
+        .top-right-buttons {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .top-right-buttons a {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .dashboard-menu {
+            position: absolute;
+            top: 10px;
+            right: 283px;
+            background-color: green;
+        }
+        
+</style>
+<div class="top-right-buttons">
+    <button onclick="document.location='/patients/create_appointment'" class="btn btn-primary">Create Appointment</button>
+    <button onclick="document.location='/patients/record_vaccination'" class="btn btn-primary">Record Vaccination</button>
+</div>
+<div class="dashboard-menu">
+    <button onclick="document.location='/patients'">Dashboard</button>
+</div>
+
+
+<form method="get" action="{% url 'pet_list' %}">
+    <input type="text" name="q" placeholder="Search pets">
+    <button type="submit">Search</button>
+</form>
+<ul>
+    {% for pet in pets %}
+        <li><a href="{% url 'pet_detail' pet.id %}">{{ pet.name }}</a></li>
+        
+    {% endfor %}
+</ul>

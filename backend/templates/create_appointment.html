@@ -1,0 +1,75 @@
+<!-- create_appointment.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Appointment</title>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <style>
+        .select2-container--default .select2-selection--single {
+            height: 40px;
+            width: 300px;
+            font-size: 16px;
+        }
+        .select2-container--default .select2-dropdown {
+            width: 300px !important;
+            font-size: 16px;
+        }
+         .top-right-buttons {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .top-right-buttons a {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .dashboard-menu {
+            position: absolute;
+            top: 10px;
+            right: 283px;
+            background-color: green;
+        }
+        
+    </style>
+
+</head>
+<body>
+    <div class="top-right-buttons">
+        <button onclick="document.location='/patients/create_appointment'" class="btn btn-primary">Create Appointment</button>
+        <button onclick="document.location='/patients/record_vaccination'" class="btn btn-primary">Record Vaccination</button>
+    </div>
+    <div class="dashboard-menu">
+        <button onclick="document.location='/patients'">Dashboard</button>
+    </div>
+    <h1>Create Appointment</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+    <script>
+        $(document).ready(function() {
+            $('#id_customer').select2();
+            $('#id_pet').select2();
+            $('#id_customer').change(function() {
+                var customerId = $(this).val();
+                $.ajax({
+                    url: '{% url "get_pets_by_customer" %}',
+                    data: {
+                        'customer_id': customerId
+                    },
+                    success: function(data) {
+                        var petSelect = $('#id_pet');
+                        petSelect.empty();
+                        $.each(data.pets, function(key, value) {
+                            petSelect.append('<option value="' + value.id + '">' + value.name + '</option>');
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

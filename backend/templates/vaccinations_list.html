@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vaccinations List</title>
+     <style>
+        .top-right-buttons {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .top-right-buttons a {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .dashboard-menu {
+            position: absolute;
+            top: 10px;
+            right: 283px;
+            background-color: green;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="top-right-buttons">
+        <button onclick="document.location='/patients/create_appointment'" class="btn btn-primary">Create Appointment</button>
+        <button onclick="document.location='/patients/record_vaccination'" class="btn btn-primary">Record Vaccination</button>
+    </div>
+    <div class="dashboard-menu">
+        <button onclick="document.location='/patients'">Dashboard</button>
+    </div>
+    <h1>Today's Vaccinations</h1>
+    <table border="1">
+        <tr>
+            <th>Date</th>
+            <th>Vaccine</th>
+            <th>Customer</th>
+            <th>Pet</th>
+            <th>Actions</th>
+        </tr>
+        {% for vaccination in todays_vaccinations %}
+        <tr>
+            <td>{{ vaccination.vaccination_date }}</td>
+            <td>{{ vaccination.vaccine_name }}</td>
+            <td>{{ vaccination.customer.name }}</td>
+            <td>{{ vaccination.pet.name }}</td>
+            <td>
+                <a href="{% url 'vaccination_detail' vaccination.id %}">View</a>
+                <a href="{% url 'edit_vaccination' vaccination.id %}">Edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h1>All Vaccinations</h1>
+    <table border="1">
+        <tr>
+            <th>Date</th>
+            <th>Vaccine</th>
+            <th>Customer</th>
+            <th>Pet</th>
+            <th>Actions</th>
+        </tr>
+        {% for vaccination in all_vaccinations %}
+        <tr>
+            <td>{{ vaccination.vaccination_date }}</td>
+            <td>{{ vaccination.vaccine_name }}</td>
+            <td>{{ vaccination.customer.name }}</td>
+            <td>{{ vaccination.pet.name }}</td>
+            <td>
+                <a href="{% url 'vaccination_detail' vaccination.id %}">View</a>
+                <a href="{% url 'edit_vaccination' vaccination.id %}">Edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
