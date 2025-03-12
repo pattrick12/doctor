@@ -16,7 +16,7 @@
             position: absolute;
             top: 10px;
             right: 283px;
-            background-color: green;
+            background-color: white;
         }
         
     </style>
@@ -28,8 +28,10 @@
     </div>
     <div class="dashboard-menu">
         <button onclick="document.location='/patients'">Dashboard</button>
+        <button onclick="document.location='/patients/customers'">Customers</button>
     </div>
     <h1>Appointment Detail</h1>
+    <hr>
     <p>Appointment Date: {{ appointment.appointment_date }}</p>
     <p>Reason: {{ appointment.reason }}</p>
     <p>Status: {{ appointment.status }}</p>
@@ -40,6 +42,18 @@
     <p>Diagnosis: {{ appointment.diagnosis }}</p>
     <p>Prescription: {{ appointment.prescription }}</p>
     <p>Additional Notes: {{ appointment.additional_notes }}</p>
-    <a href="{% url 'edit_appointment' appointment.id %}">Edit</a>
+    <hr>
+    <p>Amount: {{ billing.total_amount }} </p>
+    <p>Payment status: {{ billing.payment_status }}</p>
+    <p>Payment date: {{ billing.payment_date }} </p>
+    <br><hr>
+    
+    <a href="{% url 'edit_appointment' appointment.id %}">Edit this appointment</a>
+    <br>
+    <p></p>
+    <p></p>
+    <br>
+    <br>
+    <a href="{% url 'appointments_list' %}">Back to Appointments List</a>
 </body>
 </html>

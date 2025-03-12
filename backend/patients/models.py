@@ -2,6 +2,8 @@
 
 # Create your models here.
 from django.db import models
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey
 
 
 class Customers(models.Model):
@@ -77,6 +79,16 @@ class Appointments(models.Model):
     def __str__(self):
         return f"Appointment for {self.pet.name} on {self.appointment_date}"
 
+    def delete(self, *args, **kwargs):
+        billing = Billing.objects.filter(object_id=self.id,
+                                         content_type=ContentType.objects.get_for_model(Appointments)).first()
+        if billing:
+            if billing.payment_status == 'Paid':
+                billing.payment_status = 'Refunded'
+            elif billing.payment_status == 'Pending':
+                billing.payment_status = 'Cancelled'
+            billing.save()
+        super().delete(*args, **kwargs)
 
 class VaccinationRecords(models.Model):
     pet= models.ForeignKey(Pets, on_delete=models.CASCADE)
@@ -92,19 +104,35 @@ class VaccinationRecords(models.Model):
     def __str__(self): 
         return f"Vaccination for {self.pet.name} on {self.vaccination_date}"
 
+    def delete(self, *args, **kwargs):
+        billing = Billing.objects.filter(object_id=self.id,
+                                         content_type=ContentType.objects.get_for_model(VaccinationRecords)).first()
+        if billing:
+            if billing.payment_status == 'Paid':
+                billing.payment_status = 'Refunded'
+            elif billing.payment_status == 'Pending':
+                billing.payment_status = 'Cancelled'
+            billing.save()
+        super().delete(*args, **kwargs)
 class Billing(models.Model):
     PAYMENT_STATUS_CHOICES = [
         ('Pending', 'Pending'),
         ('Paid', 'Paid'),
+        ('refunded', 'Refunded'),
+        ('cancelled', 'Cancelled'),
     ]
 
     customer = models.ForeignKey(Customers, on_delete=models.CASCADE)
     pet= models.ForeignKey(Pets, on_delete=models.CASCADE)
-    appointment = models.ForeignKey(Appointments, on_delete=models.SET_NULL, null=True, blank=True)
     total_amount = models.DecimalField(max_digits=10, decimal_places=2)
     payment_status = models.CharField(max_length=10, choices=PAYMENT_STATUS_CHOICES, default='Pending')
     payment_date = models.DateTimeField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    # Generic foreign key fields
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True)
+
+    object_id = models.PositiveIntegerField(null=  True)
+    content_object = GenericForeignKey('content_type', 'object_id')
 
     def __str__(self):
         return f"Billing for {self.pet.name} - {self.total_amount}"

@@ -16,7 +16,7 @@
             position: absolute;
             top: 10px;
             right: 283px;
-            background-color: green;
+            background-color: white;
         }
         
     </style>
@@ -28,8 +28,10 @@
     </div>
     <div class="dashboard-menu">
         <button onclick="document.location='/patients'">Dashboard</button>
+        <button onclick="document.location='/patients/customers'">Customers</button>
     </div>
     <h1>Vaccination Detail</h1>
+    <hr>
     <p>Vaccine Name: {{ vaccination.vaccine_name }}</p>
     <p>Treating Doctor: {{ vaccination.treating_doctor }}</p>
     <p>Vaccination Date: {{ vaccination.vaccination_date }}</p>
@@ -38,6 +40,20 @@
     <p>Additional Notes: {{ vaccination.additional_notes }}</p>
     <p>Pet: <a href="{% url 'pet_detail' vaccination.pet.id %}">{{ vaccination.pet.name }}</a></p>
     <p>Owner: <a href="{% url 'customer_detail' vaccination.customer.id %}">{{ vaccination.customer.name }}</a></p>
-    <a href="{% url 'edit_vaccination' vaccination.id %}">Edit</a>
+    <br><hr>
+    <p>Amount: {{ billing.total_amount }} </p>
+    <p>Payment status: {{ billing.payment_status }}</p>
+    <p>Payment date: {{ billing.payment_date }} </p>
+    
+    <br>
+    <hr>
+    <a href="{% url 'edit_vaccination' vaccination.id %}">Edit this vaccination</a>
+    <p></p>
+    <p></p>
+    <br>
+    <br>
+    
+    
+    <a href="{% url 'vaccinations_list' %}">Back to Vaccinations List</a>
 </body>
 </html>

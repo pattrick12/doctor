@@ -36,4 +36,5 @@ urlpatterns += [
     path('appointments_all/', views.appointments_list, name='appointments_list'),
     path('vaccinations_all/', views.vaccinations_list, name='vaccinations_list'),
     path('ajax/get_pets_by_customer/', views.get_pets_by_customer, name='get_pets_by_customer'),
+    path('finance/', views.finance, name='finance'),
 ]

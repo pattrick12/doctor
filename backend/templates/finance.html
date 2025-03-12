@@ -1,0 +1,57 @@
+<!-- finance.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Finance</title>
+    <style>
+        .dashboard-menu {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .dashboard-menu button {
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-menu">
+        <button onclick="document.location='/patients'">Dashboard</button>
+        <button onclick="document.location='/patients/customers'">Customers</button>
+    </div>
+    <h1>Finance</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Customer</th>
+                <th>Pet</th>
+                <th>Total Amount</th>
+                <th>Payment Status</th>
+                <th>Payment Date</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for billing in billings %}
+            <tr>
+                <td>{{ billing.id }}</td>
+                <td>{{ billing.customer }}</td>
+                <td>{{ billing.pet }}</td>
+                <td>{{ billing.total_amount }}</td>
+                <td>{{ billing.payment_status }}</td>
+                <td>{{ billing.payment_date }}</td>
+                <td>
+                    {% if billing.content_type.model == 'appointments' %}
+                        Appointment
+                    {% elif billing.content_type.model == 'vaccinationrecords' %}
+                        Vaccination
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

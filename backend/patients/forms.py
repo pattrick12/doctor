@@ -1,5 +1,5 @@
 from django import forms
-from .models import Customers, Pets, Appointments, VaccinationRecords
+from .models import Customers, Pets, Appointments, VaccinationRecords, Billing
 from django_select2.forms import Select2Widget
 class CustomerForm(forms.ModelForm):
     class Meta:
@@ -71,4 +71,10 @@ class VaccinationRecordForm(forms.ModelForm):
 
 class CustomerSearchForm(forms.Form):
     customer = forms.ModelChoiceField(queryset=Customers.objects.all(), widget=Select2Widget)
-
+class BillingForm(forms.ModelForm):
+    class Meta:
+        model = Billing
+        fields = ['total_amount', 'payment_status', 'payment_date']
+        widgets={
+            'payment_date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+        }

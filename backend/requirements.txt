@@ -11,3 +11,4 @@ python-dotenv
 pymysql
 cryptography
 django_select2
+datetime
