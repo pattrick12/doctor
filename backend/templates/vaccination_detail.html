@@ -1,7 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Vaccination Detail</title>
+{% extends 'base.html' %}
+{% block title %}Vaccinataion Detail{% endblock %}
+{% block extra_head %}
      <style>
         .top-right-buttons {
             position: absolute;
@@ -16,12 +15,12 @@
             position: absolute;
             top: 10px;
             right: 283px;
-            background-color: white;
+            background-color: transparent;
         }
         
     </style>
-</head>
-<body>
+{% endblock %}
+{% block content %}
     <div class="top-right-buttons">
         <button onclick="document.location='/patients/create_appointment'" class="btn btn-primary">Create Appointment</button>
         <button onclick="document.location='/patients/record_vaccination'" class="btn btn-primary">Record Vaccination</button>
@@ -32,18 +31,26 @@
     </div>
     <h1>Vaccination Detail</h1>
     <hr>
-    <p>Vaccine Name: {{ vaccination.vaccine_name }}</p>
-    <p>Treating Doctor: {{ vaccination.treating_doctor }}</p>
-    <p>Vaccination Date: {{ vaccination.vaccination_date }}</p>
-    <p>Next Due Date: {{ vaccination.next_due_date }}</p>
-    <p>Notes: {{ vaccination.notes }}</p>
-    <p>Additional Notes: {{ vaccination.additional_notes }}</p>
-    <p>Pet: <a href="{% url 'pet_detail' vaccination.pet.id %}">{{ vaccination.pet.name }}</a></p>
-    <p>Owner: <a href="{% url 'customer_detail' vaccination.customer.id %}">{{ vaccination.customer.name }}</a></p>
+    <p><b><i>  Vaccine Name:   </i></b> &nbsp
+        {{ vaccination.vaccine_name }}</p>
+    <p><b><i>  Treating Doctor:  </i></b> &nbsp
+        {{ vaccination.treating_doctor }}</p>
+    <p><b><i>  Vaccination Date:  </i></b> &nbsp
+        {{ vaccination.vaccination_date }}</p>
+    <p><b><i>  Next Due Date:   </i></b>&nbsp
+        {{ vaccination.next_due_date }}</p>
+    <p><b><i>  Notes:   </i></b>&nbsp
+        {{ vaccination.notes }}</p>
+    <p><b><i>  Additional Notes:   </i></b>&nbsp
+        {{ vaccination.additional_notes }}</p>
+    <p><b><i>  Pet:   </i></b>&nbsp
+        <a href="{% url 'pet_detail' vaccination.pet.id %}">{{ vaccination.pet.name }}</a></p>
+    <p><b><i>  Owner:   </i></b>&nbsp
+        <a href="{% url 'customer_detail' vaccination.customer.id %}">{{ vaccination.customer.name }}</a></p>
     <br><hr>
-    <p>Amount: {{ billing.total_amount }} </p>
-    <p>Payment status: {{ billing.payment_status }}</p>
-    <p>Payment date: {{ billing.payment_date }} </p>
+    <p><b><i>  Amount: </i></b>  {{ billing.total_amount }} </p>
+    <p><b><i>  Payment status:  </i></b> {{ billing.payment_status }}</p>
+    <p><b><i>  Payment date:  </i></b> {{ billing.payment_date }} </p>
     
     <br>
     <hr>
@@ -55,5 +62,4 @@
     
     
     <a href="{% url 'vaccinations_list' %}">Back to Vaccinations List</a>
-</body>
-</html>
+{% endblock %}

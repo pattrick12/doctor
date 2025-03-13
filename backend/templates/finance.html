@@ -1,8 +1,6 @@
-<!-- finance.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Finance</title>
+{% extends 'base.html' %}
+{% block title %}Finance{% endblock %}
+{% block extra_head %}
     <style>
         .dashboard-menu {
             position: absolute;
@@ -10,12 +8,24 @@
             right: 10px;
         }
         .dashboard-menu button {
-            display: block;
-            margin-bottom: 5px;
+            display: inline-block;
+            margin-right: 10px;
+        }
+         table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid var(--table-border-color);
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
         }
     </style>
-</head>
-<body>
+{% endblock %}
+{% block content %}
+
     <div class="dashboard-menu">
         <button onclick="document.location='/patients'">Dashboard</button>
         <button onclick="document.location='/patients/customers'">Customers</button>
@@ -31,6 +41,7 @@
                 <th>Payment Status</th>
                 <th>Payment Date</th>
                 <th>Type</th>
+                <th>Date</th>
             </tr>
         </thead>
         <tbody>
@@ -49,9 +60,23 @@
                         Vaccination
                     {% endif %}
                 </td>
+                <td>
+                    {% if billing.content_type.model == 'appointments' %}
+                        {% if billing.content_object.appointment_date %}
+                            {{ billing.content_object.appointment_date }}
+                        {% else %}
+                            Appointment cancelled
+                        {% endif %}
+                    {% elif billing.content_type.model == 'vaccinationrecords' %}
+                        {% if billing.content_object.vaccination_date %}
+                            {{ billing.content_object.vaccination_date }}
+                        {% else %}
+                            Vaccination cancelled
+                        {% endif %}
+                    {% endif %}
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-</body>
-</html>
+{% endblock %}

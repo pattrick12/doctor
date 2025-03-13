@@ -1,7 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Edit Customer</title>
+{% extends 'base.html' %}
+{% block title %}Edit Customer{% endblock %}
+{% block extra_head %}
+
      <style>
         .top-right-buttons {
             position: absolute;
@@ -16,12 +16,12 @@
             position: absolute;
             top: 10px;
             right: 283px;
-            background-color: white;
+            background-color: transparent;
         }
         
     </style>
-</head>
-<body>
+{% endblock %}
+{% block content %}
     <div class="top-right-buttons">
         <button onclick="document.location='/patients/create_appointment'" class="btn btn-primary">Create Appointment</button>
         <button onclick="document.location='/patients/record_vaccination'" class="btn btn-primary">Record Vaccination</button>
@@ -37,5 +37,4 @@
         {{ billing_form.as_p }}
         <button type="submit">Save</button>
     </form>
-</body>
-</html>
+{% endblock %}

@@ -1,7 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Record Vaccination</title>
+{% extends 'base.html' %}
+{% block title %}Record Vaccinataion{% endblock %}
+{% block extra_head %}
      {% load static %}
     <link href="{% static 'css/select2.min.css' %}" rel="stylesheet" />
     <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
@@ -32,13 +31,13 @@
             position: absolute;
             top: 10px;
             right: 283px;
-            background-color: white;
+            background-color: transparent;
         }
         
     </style>
 
-</head>
-<body>
+{% endblock %}
+{% block content %}
     <div class="top-right-buttons">
         <button onclick="document.location='/patients/create_appointment'" class="btn btn-primary">Create Appointment</button>
         <button onclick="document.location='/patients/record_vaccination'" class="btn btn-primary">Record Vaccination</button>
@@ -76,5 +75,4 @@
             });
         });
     </script>
-</body>
-</html>
+{% endblock %}

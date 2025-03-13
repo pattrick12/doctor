@@ -1,7 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Customer Detail</title>
+{% extends 'base.html' %}
+{% block title %}Custtomer Details{% endblock %}
+{% block extra_head %}
     <style>
         .top-right-buttons {
             position: absolute;
@@ -16,12 +15,12 @@
             position: absolute;
             top: 10px;
             right: 283px;
-            background-color: white;
+            background-color: transparent;
         }
         
     </style>
-</head>
-<body>
+{% endblock %}
+{% block content %}
     <div class="top-right-buttons">
         <button onclick="document.location='/patients/create_appointment'" class="btn btn-primary">Create Appointment</button>
         <button onclick="document.location='/patients/record_vaccination'" class="btn btn-primary">Record Vaccination</button>
@@ -30,13 +29,17 @@
         <button onclick="document.location='/patients'">Dashboard</button>
         <button onclick="document.location='/patients/customers'">Customers</button>
     </div>
-
-    <h1>{{ customer.name }}</h1>
+    <h1>Customer Details</h1>
+    <hr>
+    <h2>{{ customer.name }}</h2>
     <p>Phone: {{ customer.contact_number }}</p>
     <p>Address: {{ customer.address }}</p>
     <p>Email: {{ customer.email }}</p>
     <a href="{% url 'edit_customer' customer.id %}">Edit Customer</a>
-
+    <p></p>
+    <br>
+    <hr>
+    
     <h2>Pets</h2>
     <ul>
         {% for pet in pets %}
@@ -46,7 +49,9 @@
             </li>
         {% endfor %}
     </ul>
-
+    <br>
+    <hr>
+    <br>
     <h2>Appointments</h2>
     <ul>
         {% for appointment in appointments %}
@@ -56,7 +61,8 @@
         {% endfor %}
     </ul>
     <a href="{% url 'create_appointment' %}">Create Appointment</a>
-
+    <br>
+    <br>
     <h2>Vaccination Records</h2>
     <ul>
         {% for record in vaccination_records %}
@@ -66,5 +72,7 @@
         {% endfor %}
     </ul>
     <a href="{% url 'record_vaccination' %}">Record Vaccination</a>
-</body>
-</html>
+    <br>
+    <p></p>
+    <hr>
+{% endblock %}

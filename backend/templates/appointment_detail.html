@@ -1,27 +1,29 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Appointment Detail</title>
-        <style>
-        .top-right-buttons {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-        .top-right-buttons a {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .dashboard-menu {
-            position: absolute;
-            top: 10px;
-            right: 283px;
-            background-color: white;
-        }
-        
-    </style>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Appointment Detail{% endblock %}
+{% block extra_head%}
+    <style>
+            .top-right-buttons {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+               
+            }
+            .top-right-buttons a {
+                display: block;
+                margin-bottom: 5px;
+            }
+            .dashboard-menu {
+                position: absolute;
+                top: 10px;
+                right: 283px;
+                background-color: transparent;
+            }
+    
+        </style>
+{% endblock %}
+
+{% block content %}
     <div class="top-right-buttons">
         <button onclick="document.location='/patients/create_appointment'" class="btn btn-primary">Create Appointment</button>
         <button onclick="document.location='/patients/record_vaccination'" class="btn btn-primary">Record Vaccination</button>
@@ -32,22 +34,22 @@
     </div>
     <h1>Appointment Detail</h1>
     <hr>
-    <p>Appointment Date: {{ appointment.appointment_date }}</p>
-    <p>Reason: {{ appointment.reason }}</p>
-    <p>Status: {{ appointment.status }}</p>
-    <p>Appointment Type: {{ appointment.appointment_type }}</p>
-    <p>Treating Doctor: {{ appointment.treating_doctor }}</p>
-    <p>Pet: <a href="{% url 'pet_detail' appointment.pet.id %}">{{ appointment.pet.name }}</a></p>
-    <p>Owner: <a href="{% url 'customer_detail' appointment.customer.id %}">{{ appointment.customer.name }}</a></p>
-    <p>Diagnosis: {{ appointment.diagnosis }}</p>
-    <p>Prescription: {{ appointment.prescription }}</p>
-    <p>Additional Notes: {{ appointment.additional_notes }}</p>
+    <p><b><i> Appointment Date:  </i></b> &nbsp {{ appointment.appointment_date }}</p>
+    <p><b><i> Reason:  </i></b> &nbsp {{ appointment.reason }}</p>
+    <p><b><i> Status: </i></b> &nbsp  {{ appointment.status }}</p>
+    <p><b><i> Appointment Type:  </i></b> &nbsp {{ appointment.appointment_type }}</p>
+    <p><b><i> Treating Doctor: </i></b> &nbsp  {{ appointment.treating_doctor }}</p>
+    <p><b><i> Pet: </i></b> &nbsp  <a href="{% url 'pet_detail' appointment.pet.id %}">{{ appointment.pet.name }}</a></p>
+    <p><b><i> Owner:  </i></b> &nbsp <a href="{% url 'customer_detail' appointment.customer.id %}">{{ appointment.customer.name }}</a></p>
+    <p><b><i> Diagnosis:  </i></b> &nbsp {{ appointment.diagnosis }}</p>
+    <p><b><i> Prescription: </i></b> &nbsp  {{ appointment.prescription }}</p>
+    <p><b><i> Additional Notes: </i></b> &nbsp  {{ appointment.additional_notes }}</p>
     <hr>
-    <p>Amount: {{ billing.total_amount }} </p>
-    <p>Payment status: {{ billing.payment_status }}</p>
-    <p>Payment date: {{ billing.payment_date }} </p>
+    <p><b><i> Amount:  </i></b> &nbsp {{ billing.total_amount }} </p>
+    <p><b><i> Payment status:  </i></b> &nbsp {{ billing.payment_status }}</p>
+    <p><b><i> Payment date:  </i></b> &nbsp {{ billing.payment_date }} </p>
     <br><hr>
-    
+
     <a href="{% url 'edit_appointment' appointment.id %}">Edit this appointment</a>
     <br>
     <p></p>
@@ -55,5 +57,96 @@
     <br>
     <br>
     <a href="{% url 'appointments_list' %}">Back to Appointments List</a>
-</body>
-</html>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{#<!DOCTYPE html>#}
+{#<html>#}
+{#<head>#}
+{#    <title>Appointment Detail</title>#}
+{#        <style>#}
+{#        .top-right-buttons {#}
+{#            position: absolute;#}
+{#            top: 10px;#}
+{#            right: 10px;#}
+{#        }#}
+{#        .top-right-buttons a {#}
+{#            display: block;#}
+{#            margin-bottom: 5px;#}
+{#        }#}
+{#        .dashboard-menu {#}
+{#            position: absolute;#}
+{#            top: 10px;#}
+{#            right: 283px;#}
+{#            background-color: white;#}
+{#        }#}
+{#        #}
+{#    </style>#}
+{#</head>#}
+{#<body>#}
+{#    <div class="top-right-buttons">#}
+{#        <button onclick="document.location='/patients/create_appointment'" class="btn btn-primary">Create Appointment</button>#}
+{#        <button onclick="document.location='/patients/record_vaccination'" class="btn btn-primary">Record Vaccination</button>#}
+{#    </div>#}
+{#    <div class="dashboard-menu">#}
+{#        <button onclick="document.location='/patients'">Dashboard</button>#}
+{#        <button onclick="document.location='/patients/customers'">Customers</button>#}
+{#    </div>#}
+{#    <h1>Appointment Detail</h1>#}
+{#    <hr>#}
+{#    <p>Appointment Date: {{ appointment.appointment_date }}</p>#}
+{#    <p>Reason: {{ appointment.reason }}</p>#}
+{#    <p>Status: {{ appointment.status }}</p>#}
+{#    <p>Appointment Type: {{ appointment.appointment_type }}</p>#}
+{#    <p>Treating Doctor: {{ appointment.treating_doctor }}</p>#}
+{#    <p>Pet: <a href="{% url 'pet_detail' appointment.pet.id %}">{{ appointment.pet.name }}</a></p>#}
+{#    <p>Owner: <a href="{% url 'customer_detail' appointment.customer.id %}">{{ appointment.customer.name }}</a></p>#}
+{#    <p>Diagnosis: {{ appointment.diagnosis }}</p>#}
+{#    <p>Prescription: {{ appointment.prescription }}</p>#}
+{#    <p>Additional Notes: {{ appointment.additional_notes }}</p>#}
+{#    <hr>#}
+{#    <p>Amount: {{ billing.total_amount }} </p>#}
+{#    <p>Payment status: {{ billing.payment_status }}</p>#}
+{#    <p>Payment date: {{ billing.payment_date }} </p>#}
+{#    <br><hr>#}
+{#    #}
+{#    <a href="{% url 'edit_appointment' appointment.id %}">Edit this appointment</a>#}
+{#    <br>#}
+{#    <p></p>#}
+{#    <p></p>#}
+{#    <br>#}
+{#    <br>#}
+{#    <a href="{% url 'appointments_list' %}">Back to Appointments List</a>#}
+{#</body>#}
+{#</html>#}

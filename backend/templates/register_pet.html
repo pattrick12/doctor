@@ -1,7 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Register Pet</title>
+{% extends 'base.html' %}
+{% block title %}Pet Registration{% endblock %}
+{% block extra_head %}
      {% load static %}
     <link href="{% static 'css/select2.min.css' %}" rel="stylesheet" />
     <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
@@ -23,12 +22,12 @@
             position: absolute;
             top: 10px;
             right: 23px;
-            background-color: white;
+            background-color: transparent;
         }
     </style>
 
-</head>
-<body>
+{% endblock %}
+{% block content %}
     <div class="dashboard-menu">
         <button onclick="document.location='/patients'">Dashboard</button>
         <button onclick="document.location='/patients/customers'">Customers</button>
@@ -44,5 +43,4 @@
             $('#id_customer').select2();
         });
     </script>
-</body>
-</html>
+{% endblock %}

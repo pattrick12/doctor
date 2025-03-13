@@ -2,31 +2,95 @@
 <html>
 <head>
     <title>Dashboard</title>
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(4, 350px); /* Fixed width for each column */
+            gap: 20px;
+            list-style-type: none;
+            padding: 0;
+            justify-content: center; /* Center the grid */
+        }
+        .grid-item {
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+        }
+        .grid-item a {
+            text-decoration: none;
+            color: var(--text-color); /* Use the text color variable */
+            font-weight: bold;
+        }
+        .grid-item:nth-child(9) {
+            grid-column: 2 / span 2; /* Ensure it spans only one column */
+            width: 350px; /* Set the width to 350px */
+            justify-self: center; /* Center the finance box */
+        }
+
+        :root {
+            --background-color: #ffffff;
+            --text-color: #000000;
+            --grid-item-background: #f2f2f2;
+            --grid-item-border: #ccc;
+        }
+
+        [data-theme="dark"] {
+            --background-color: #121212;
+            --text-color: #ffffff;
+            --grid-item-background: #333333;
+            --grid-item-border: #444444;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        .grid-item {
+            background-color: var(--grid-item-background);
+            border: 1px solid var(--grid-item-border);
+            
+        }
+        #theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: var(--grid-item-background);
+            border: 1px solid var(--grid-item-border);
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to the Dashboard</h1>
-    <ul><h3>
-        <li><a href="{% url 'register_customer' %}">Register Customer</a></li>
-        <br>
-        <li><a href="{% url 'register_pet' %}">Register Pet</a></li>
-        <br>
-        <li><a href="{% url 'customer_list' %}">Customer-List</a></li>
-        <br>
-        <li><a href="{% url 'create_appointment' %}">Create Appointment</a></li>
-        <br>
-        <li><a href="{% url 'record_vaccination' %}">Record Vaccination</a></li>
-        <br>
-        <li><a href="{% url 'customer_search' %}">Customers</a></li>
-        <br>
-        <li><a href="{% url 'pet_list' %}">Pets</a></li>
-        <br>
-        <li><a href="{% url 'appointments_list' %}">Appointments</a></li>
-        <br>
-        <li><a href="{% url 'vaccinations_list' %}">Vaccinations</a></li>
-        <br>
-        <li><a href="{% url 'finance' %}">Finance</a></li>
-    </h3>
+    <h1>Welcome to the Dashboard, Doctor!</h1>
+    
+    <ul class="grid-container">
+        <li class="grid-item"><a href="{% url 'register_customer' %}">Register Customer</a></li>
+        <li class="grid-item"><a href="{% url 'register_pet' %}">Register Pet</a></li>
+        <li class="grid-item"><a href="{% url 'customer_search' %}">Customers</a></li>
+        <li class="grid-item"><a href="{% url 'pet_list' %}">Pets</a></li>
+        <li class="grid-item"><a href="{% url 'create_appointment' %}">Create Appointment</a></li>
+        <li class="grid-item"><a href="{% url 'record_vaccination' %}">Record Vaccination</a></li>
+        <li class="grid-item"><a href="{% url 'appointments_list' %}">Appointments</a></li>
+        <li class="grid-item"><a href="{% url 'vaccinations_list' %}">Vaccinations</a></li>
+        <li class="grid-item"><a href="{% url 'finance' %}">Finance</a></li>
     </ul>
+    <button id="theme-toggle">Toggle Dark Mode</button>
+    <script>
+        // theme-toggle.js
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleButton = document.getElementById('theme-toggle');
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', currentTheme);
 
+            toggleButton.addEventListener('click', () => {
+                const newTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+            });
+        });
+    </script>
 </body>
 </html>

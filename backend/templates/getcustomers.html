@@ -1,7 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Customer Search</title>
+{% extends 'base.html' %}
+{% block title %}Customers{% endblock %}
+{% block extra_head %}
      {% load static %}
   <link href="{% static 'css/select2.min.css' %}" rel="stylesheet" />
     <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
@@ -32,14 +31,26 @@
             position: absolute;
             top: 10px;
             right: 283px;
-            background-color: white;
+            background-color: transparent;
+            
+        }
+          table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid var(--table-border-color);
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
         }
         
     
     </style>
 
-</head>
-<body>
+{% endblock %}
+{% block content %}
     <div class="top-right-buttons">
         <button onclick="document.location='/patients/create_appointment'" class="btn btn-primary">Create Appointment</button>
         <button onclick="document.location='/patients/record_vaccination'" class="btn btn-primary">Record Vaccination</button>
@@ -74,12 +85,26 @@
     <br>
     <hr>
     <h2>Or Simply click on the desired customer from the list below:</h2>
-    <ul>
-        {% for customer in customers %}
-            <li>
-                <a href="{% url 'customer_detail' customer.id %}">{{ customer.name }}</a>
-            </li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+     <h1>Customer List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Contact Number</th>
+                <th>Address</th>
+                <th>Email</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for customer in customers %}
+            <tr>
+                <td><a href="{% url 'customer_detail' customer.id %}">{{ customer.name }}<a></a></td>
+                <td>{{ customer.contact_number }}</td>
+                <td>{{ customer.address }}</td>
+                <td>{{ customer.email }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

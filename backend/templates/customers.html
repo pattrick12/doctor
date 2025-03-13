@@ -2,54 +2,84 @@
 <html>
 <head>
     <title>Customer List</title>
-     <style>
-        .top-right-buttons {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-        .top-right-buttons a {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .dashboard-menu {
-            position: absolute;
-            top: 10px;
-            right: 283px;
-            background-color: white;
-        }
-        
-    </style>
+    <script>
+        window.location.href = "/patients/customers";
+    </script>
 </head>
 <body>
-    <div class="top-right-buttons">
-        <button onclick="document.location='/patients/create_appointment'" class="btn btn-primary">Create Appointment</button>
-        <button onclick="document.location='/patients/record_vaccination'" class="btn btn-primary">Record Vaccination</button>
-    </div>
-    <div class="dashboard-menu">
-        <button onclick="document.location='/patients'">Dashboard</button>
-        <button onclick="document.location='/patients/customers'">Customers</button>
-    </div>
-    <h1>Customer List</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Contact Number</th>
-                <th>Address</th>
-                <th>Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for customer in customers %}
-            <tr>
-                <td>{{ customer.name }}</td>
-                <td>{{ customer.contact_number }}</td>
-                <td>{{ customer.address }}</td>
-                <td>{{ customer.email }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <!-- The rest of your HTML content can remain here if needed -->
 </body>
 </html>
+
+
+
+
+
+
+{#<!DOCTYPE html>#}
+{#<html>#}
+{#<head>#}
+{#    <title>Customer List</title>#}
+{#     <style>#}
+{#        .top-right-buttons {#}
+{#            position: absolute;#}
+{#            top: 10px;#}
+{#            right: 10px;#}
+{#        }#}
+{#        .top-right-buttons a {#}
+{#            display: block;#}
+{#            margin-bottom: 5px;#}
+{#        }#}
+{#        .dashboard-menu {#}
+{#            position: absolute;#}
+{#            top: 10px;#}
+{#            right: 283px;#}
+{#            background-color: white;#}
+{#        }#}
+{#         table {#}
+{#            width: 100%;#}
+{#            border-collapse: collapse;#}
+{#        }#}
+{#        table, th, td {#}
+{#            border: 1px solid black;#}
+{#        }#}
+{#        th, td {#}
+{#            padding: 8px;#}
+{#            text-align: left;#}
+{#        }#}
+{#        #}
+{#    </style>#}
+{#</head>#}
+{#<body>#}
+{#    <div class="top-right-buttons">#}
+{#        <button onclick="document.location='/patients/create_appointment'" class="btn btn-primary">Create Appointment</button>#}
+{#        <button onclick="document.location='/patients/record_vaccination'" class="btn btn-primary">Record Vaccination</button>#}
+{#    </div>#}
+{#    <div class="dashboard-menu">#}
+{#        <button onclick="document.location='/patients'">Dashboard</button>#}
+{#        <button onclick="document.location='/patients/customers'">Customers</button>#}
+{#    </div>#}
+{#    <h1>Customer List</h1>#}
+{#    <table>#}
+{#        <thead>#}
+{#            <tr>#}
+{#                <th>Name</th>#}
+{#                <th>Contact Number</th>#}
+{#                <th>Address</th>#}
+{#                <th>Email</th>#}
+{#                #}
+{#            </tr>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#            {% for customer in customers %}#}
+{#            <tr>#}
+{#                <td><a href="{% url 'customer_detail' customer.id %}">{{ customer.name }}<a></a></td>#}
+{#                <td>{{ customer.contact_number }}</td>#}
+{#                <td>{{ customer.address }}</td>#}
+{#                <td>{{ customer.email }}</td>#}
+{#            </tr>#}
+{#            {% endfor %}#}
+{#        </tbody>#}
+{#    </table>#}
+{#</body>#}
+{#</html>#}

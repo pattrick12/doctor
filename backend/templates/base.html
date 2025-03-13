@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}My App{% endblock %}</title>
+    <style>
+        :root {
+            --background-color: #ffffff;
+            --text-color: #000000;
+            --link-color: #0349cb;
+            --visited-link-color: #0349cb;
+            --grid-item-background: #f2f2f2;
+            --grid-item-border: #ccc;
+            --table-border-color: black;
+            --th-color: #7c0404;
+             --dropdown-background: #ffffff;
+            --dropdown-text-color: #000000;
+            --input-background: #ffffff;
+            --input-text-color: #000000;
+            --select-background: #ffffff;
+            --select-text-color: #000000;
+        }
+
+        [data-theme="dark"] {
+            --background-color: #121212;
+            --text-color: #ffffff;
+            --link-color: orange;
+            --visited-link-color: lightgreen;
+            --grid-item-background: #333333;
+            --grid-item-border: #444444;
+            --table-border-color: #646262;
+            --th-color: #868383;
+            --dropdown-background: #333333;
+            --dropdown-text-color: #ffffff;
+            --input-background: #333333;
+            --input-text-color: #ffffff;
+            --select-background: #333333;
+            --select-text-color: #ffffff;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        a {
+            color: var(--link-color);
+        }
+
+        a:visited {
+            color: var(--visited-link-color);
+        }
+
+        .grid-item {
+            background-color: var(--grid-item-background);
+            border: 1px solid var(--grid-item-border);
+        }
+
+        table, th, td {
+            border: 1px solid var(--table-border-color);
+        }
+        
+         th {
+             font-weight: bold;
+             color: var(--th-color);
+             font-size: large;
+        }
+        /* Specific styles for #id_pet select2 container */
+    .select2-container--default .select2-selection--single {
+        background-color: var(--dropdown-background);
+        color: var(--dropdown-text-color);
+    }
+
+    #id_pet + .select2-container--default .select2-selection__rendered {
+        background-color: var(--dropdown-background);
+        color: var(--dropdown-text-color);
+    }
+
+    .select2-container--default .select2-selection--single  {
+        background-color: var(--dropdown-background);
+    }
+
+    .select2-container--default .select2-dropdown {
+        background-color: var(--dropdown-background);
+        color: var(--dropdown-text-color);
+    }
+
+    .select2-container--default .select2-results__option {
+        background-color: var(--dropdown-background);
+        color: var(--dropdown-text-color);
+    }    
+        
+        input, textarea {
+        background-color: var(--input-background);
+        color: var(--input-text-color);
+        }
+         select {
+        background-color: var(--select-background);
+        color: var(--select-text-color);
+        }
+
+
+        #theme-toggle {
+            position: fixed;
+            top: 40px;
+            right: 10px;
+            padding: 5px 5px;
+            background-color: var(--grid-item-background);
+            border: 1px solid var(--grid-item-border);
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    {% block content %}{% endblock %}
+    <button id="theme-toggle">Toggle Dark Mode</button>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleButton = document.getElementById('theme-toggle');
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+
+            toggleButton.addEventListener('click', () => {
+                const newTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+            });
+        });
+    </script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>
