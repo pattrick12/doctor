@@ -4,7 +4,8 @@
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
-
+from datetime import date
+from django.core.validators import MaxValueValidator
 
 class Customers(models.Model):
     name = models.CharField(max_length=100)
@@ -15,6 +16,10 @@ class Customers(models.Model):
 
     def __str__(self):
         return self.name
+
+from django.db import models
+
+from django.db import models
 
 class Pets(models.Model):
     GENDER_CHOICES = [
@@ -27,7 +32,10 @@ class Pets(models.Model):
     name = models.CharField(max_length=100)
     species = models.CharField(max_length=50)
     breed = models.CharField(max_length=50, blank=True, null=True)
-    age = models.IntegerField(blank=True, null=True)
+    age_years = models.PositiveIntegerField(blank=True, null=True)
+    age_months = models.PositiveIntegerField(blank=True, null=True, validators=[MaxValueValidator(11)])
+    age_days = models.PositiveIntegerField(blank=True, null=True, validators=[MaxValueValidator(28)])
+    date_of_birth = models.DateField(null=True, blank=True)
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default='Unknown')
     notes = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -35,6 +43,22 @@ class Pets(models.Model):
     def __str__(self):
         return self.name
 
+    def get_age(self):
+        if self.date_of_birth:
+            today = date.today()
+            years = today.year - self.date_of_birth.year
+            months = today.month - self.date_of_birth.month
+            days = today.day - self.date_of_birth.day
+            if days < 0:
+                months -= 1
+                days += 30
+            if months < 0:
+                years -= 1
+                months += 12
+            return f"{years} years, {months} months, {days} days"
+        elif self.age_years is not None or self.age_months is not None or self.age_days is not None:
+            return f"{self.age_years or 0} years, {self.age_months or 0} months, {self.age_days or 0} days"
+        return None
 class Users(models.Model):
     ROLE_CHOICES = [
         ('Admin', 'Admin'),

@@ -36,9 +36,11 @@
     <button type="submit">Search</button>
 </form>
 <ul>
-    {% for pet in pets %}
-        <li><a href="{% url 'pet_detail' pet.id %}">{{ pet.name }}</a></li>
-        
-    {% endfor %}
+   {% for pet in pets %}
+    <li>{{ pet.name }} - {{ pet.species }} - {{ pet.breed }} - {{ pet.get_age }}
+        <a href="{% url 'pet_detail' pet.id %}">View</a>
+        <a href="{% url 'edit_pet' pet.id %}">Edit</a>
+    </li>
+{% endfor %}
 </ul>
 {% endblock %}

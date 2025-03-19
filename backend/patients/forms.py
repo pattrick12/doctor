@@ -6,15 +6,23 @@ class CustomerForm(forms.ModelForm):
         model = Customers
         fields = ['name', 'contact_number', 'address', 'email']
 
+from django import forms
+from .models import Pets
+from django_select2.forms import Select2Widget
+
+from django import forms
+from .models import Pets
+from django_select2.forms import Select2Widget
+
+
 class PetForm(forms.ModelForm):
     class Meta:
         model = Pets
-        fields = ['customer', 'name', 'species', 'breed', 'age', 'gender', 'notes']
+        fields = ['customer', 'name', 'species', 'breed', 'age_years', 'age_months', 'age_days', 'date_of_birth', 'gender', 'notes']
         widgets = {
             'customer': Select2Widget,
+            'date_of_birth': forms.DateInput(attrs={'type': 'date'}),
         }
-
-
 class AppointmentForm(forms.ModelForm):
     class Meta:
         model = Appointments
